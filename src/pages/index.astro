@@ -1,0 +1,355 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <title>cummins.dev</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav>
+        <a href="/" class="nav-home">cummins.dev</a>
+        <div class="nav-links">
+          <a href="/about">about</a>
+          <a href="/work">work</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <pre class="ascii-art" aria-hidden="true">
+ ██████╗██╗   ██╗███╗   ███╗███╗   ███╗██╗███╗   ██╗███████╗
+██╔════╝██║   ██║████╗ ████║████╗ ████║██║████╗  ██║██╔════╝
+██║     ██║   ██║██╔████╔██║██╔████╔██║██║██╔██╗ ██║███████╗
+██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║██║╚██╗██║╚════██║
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║██║ ╚████║███████║
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝
+                                              <span class="accent">.dev</span></pre>
+
+      <div class="terminal" id="terminal">
+        <div class="terminal-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="terminal-title">bash — cummins.dev</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="terminal-output" id="output">
+            <div class="line">Welcome to cummins.dev — type <span class="accent">help</span> for available commands.</div>
+          </div>
+          <div class="terminal-input-line">
+            <span class="prompt-text">ryan@cummins.dev:~$&nbsp;</span>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="terminal-input"
+                class="terminal-input"
+                autofocus
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Terminal input"
+              />
+              <span class="cursor" id="cursor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="home-nav">
+        <a href="/about">~/about</a>
+        <a href="/work">~/work</a>
+      </nav>
+    </main>
+
+    <footer class="site-footer">
+      <span>&copy; {new Date().getFullYear()} Ryan Cummins</span>
+      <span class="sep">&middot;</span>
+      <a href="https://github.com/rycummins" target="_blank" rel="noopener">github</a>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
+
+<style>
+  .ascii-art {
+    color: var(--accent);
+    font-size: 0.45rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  .ascii-art .accent {
+    color: var(--text);
+  }
+
+  .terminal {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .terminal-header {
+    background: var(--border);
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #febc2e; }
+  .dot.green { background: #28c840; }
+
+  .terminal-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .terminal-output .line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+  }
+</style>
+
+<style is:global>
+  /* Global so dynamically created lines get styled too */
+  #output .line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  #output .line .accent {
+    color: var(--accent);
+  }
+
+  #output .line .prompt-text {
+    color: var(--accent);
+  }
+
+  .terminal-input-line {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .prompt-text {
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .input-wrapper {
+    flex: 1;
+    position: relative;
+  }
+
+  .terminal-input {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    width: 100%;
+    outline: none;
+    caret-color: transparent;
+  }
+
+  .cursor {
+    position: absolute;
+    top: 0;
+    width: 0.55em;
+    height: 1.2em;
+    background: var(--accent);
+    opacity: 0.8;
+    animation: blink 1s step-end infinite;
+    pointer-events: none;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .home-nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav.home-nav a {
+    color: var(--text-muted);
+  }
+
+  nav.home-nav a:hover {
+    color: var(--accent);
+  }
+
+  header nav {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-home {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .sep {
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .ascii-art {
+      font-size: 0.3rem;
+    }
+
+    .home-nav {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const commands: Record<string, string> = {
+    whoami: `<span class="accent">Ryan Cummins</span>
+Staff Infrastructure Engineer
+Philadelphia, PA
+
+Building cloud platforms, CI/CD, and developer tooling at scale.
+Currently at Underdog. Previously Comcast, Red Hat, URBN.
+Into heavy metal, Zwift, and Philly sports.`,
+
+    help: `Available commands:
+
+  <span class="accent">whoami</span>        — about me
+  <span class="accent">ls work</span>       — skills & experience
+  <span class="accent">help</span>          — this message
+  <span class="accent">clear</span>         — clear terminal`,
+
+    'ls work': `<span class="accent">cloud/</span>         AWS, GCP, Terraform, Kubernetes, Cloudflare
+<span class="accent">ci-cd/</span>         GitHub Actions, GitLab CI, Concourse, Ansible
+<span class="accent">observability/</span> Datadog, PgAnalyze, Vantage
+<span class="accent">security/</span>      PCI, SOC2, Okta, IAM Identity Center
+<span class="accent">tooling/</span>       AI-assisted infra automation, Claude Code`,
+
+    clear: '__CLEAR__',
+  };
+
+  const input = document.getElementById('terminal-input') as HTMLInputElement;
+  const output = document.getElementById('output') as HTMLElement;
+  const cursor = document.getElementById('cursor') as HTMLElement;
+  const terminalBody = document.getElementById('terminal-body') as HTMLElement;
+
+  function updateCursor() {
+    const ch = input.value.length;
+    cursor.style.left = `${ch * 0.55}em`;
+  }
+
+  input.addEventListener('input', updateCursor);
+  input.addEventListener('click', updateCursor);
+
+  input.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      const val = input.value.trim();
+      input.value = '';
+      updateCursor();
+
+      if (!val) return;
+
+      // Echo the command
+      const echo = document.createElement('div');
+      echo.classList.add('line');
+      echo.innerHTML = `<span class="prompt-text">ryan@cummins.dev:~$</span> ${val}`;
+      output.appendChild(echo);
+
+      if (val === 'clear') {
+        output.innerHTML = '';
+      } else {
+        const response = commands[val];
+        const result = document.createElement('div');
+        result.classList.add('line');
+
+        if (response) {
+          result.innerHTML = response;
+        } else {
+          result.textContent = `command not found: ${val}`;
+        }
+        output.appendChild(result);
+      }
+
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+  });
+
+  // Focus input when clicking anywhere in terminal
+  document.getElementById('terminal')?.addEventListener('click', () => {
+    input.focus();
+  });
+
+  updateCursor();
+</script>

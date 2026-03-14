@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="work" prompt="~/work">
+  <div class="content">
+    <section>
+      <h2>Cloud & Infrastructure</h2>
+      <ul>
+        <li>AWS (EKS, ECS, EC2, IAM, Organizations, RDS, ElastiCache, MSK)</li>
+        <li>GCP (BigQuery, IAM, service accounts)</li>
+        <li>Terraform & OpenTofu — module design, multi-account patterns, Terraform Cloud</li>
+        <li>Kubernetes (EKS, Karpenter, Helm, ArgoCD)</li>
+        <li>Cloudflare (DNS, WAF, Terraform-managed)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>CI/CD & Automation</h2>
+      <ul>
+        <li>GitHub Actions, GitLab CI, Concourse</li>
+        <li>Ansible — automation platform design, inner-sourcing at scale</li>
+        <li>Bash, Python</li>
+        <li>AI-assisted infrastructure automation (Claude Code, structured workflow authoring)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Observability & Security</h2>
+      <ul>
+        <li>Datadog, PgAnalyze, Vantage</li>
+        <li>PCI Level 1, SOC2, Bulletproof audit compliance</li>
+        <li>Secrets management (AWS Secrets Manager, 1Password)</li>
+        <li>Okta & IAM Identity Center (enterprise SSO)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <ul>
+        <li>Underdog — Staff Engineer / Engineering Manager, 2022–present</li>
+        <li>Comcast — Senior Engineer, 2016–2022 (with a Red Hat consulting stint in 2018)</li>
+        <li>Urban Outfitters — DevOps Engineer, 2014–2016</li>
+        <li>Earlier roles at Comcast, UPenn, Burlington, Costco — 2007–2014</li>
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 65ch;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+    color: var(--text-muted);
+  }
+
+  ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+</style>

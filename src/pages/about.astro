@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="about" prompt="~/about">
+  <div class="content">
+    <p>
+      Staff Infrastructure Engineer based in Philadelphia. Currently at <a href="https://underdogfantasy.com" target="_blank" rel="noopener">Underdog</a>, where I've built and led the infrastructure team since 2022.
+    </p>
+    <p>
+      Working across cloud platforms, CI/CD, Kubernetes, and developer tooling — mostly at scale, mostly in high-traffic environments.
+    </p>
+    <p>
+      <a href="https://github.com/rycummins" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://linkedin.com/in/rycummins" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .content {
+    max-width: 65ch;
+  }
+  .content p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+</style>

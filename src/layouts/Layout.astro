@@ -1,0 +1,99 @@
+---
+interface Props {
+  title: string;
+  prompt?: string;
+}
+
+const { title, prompt = '~' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | cummins.dev</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav>
+        <a href="/" class="nav-home">cummins.dev</a>
+        <div class="nav-links">
+          <a href="/about">about</a>
+          <a href="/work">work</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="page-title">
+        <span class="prompt">ryan@cummins.dev:{prompt}$</span>
+      </h1>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <span>&copy; {new Date().getFullYear()} Ryan Cummins</span>
+      <span class="sep">&middot;</span>
+      <a href="https://github.com/rycummins" target="_blank" rel="noopener">github</a>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-home {
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .page-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .sep {
+    margin: 0 0.5rem;
+  }
+</style>
