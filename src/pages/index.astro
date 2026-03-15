@@ -352,4 +352,47 @@ Currently at Underdog. Previously Comcast, Red Hat, URBN.`,
   });
 
   updateCursor();
+
+  // Auto-type "help" on load
+  function runCommand(cmd: string) {
+    const echo = document.createElement('div');
+    echo.classList.add('line');
+    echo.innerHTML = `<span class="prompt-text">ryan@cummins.dev:~$</span> ${cmd}`;
+    output.appendChild(echo);
+
+    const response = commands[cmd];
+    const result = document.createElement('div');
+    result.classList.add('line');
+    if (response) {
+      result.innerHTML = response;
+    } else {
+      result.textContent = `command not found: ${cmd}`;
+    }
+    output.appendChild(result);
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+  }
+
+  function typeCommand(cmd: string, callback: () => void) {
+    let i = 0;
+    const interval = setInterval(() => {
+      input.value = cmd.slice(0, ++i);
+      updateCursor();
+      if (i === cmd.length) {
+        clearInterval(interval);
+        callback();
+      }
+    }, 80);
+  }
+
+  // Wait a beat, then type "help"
+  setTimeout(() => {
+    typeCommand('help', () => {
+      setTimeout(() => {
+        input.value = '';
+        updateCursor();
+        runCommand('help');
+        input.focus();
+      }, 300);
+    });
+  }, 600);
 </script>
