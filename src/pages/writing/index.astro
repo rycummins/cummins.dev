@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const essays = (await getCollection('writing')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<Layout title="writing" prompt="~/writing">
+  <ul class="essay-list">
+    {essays.map((essay) => (
+      <li>
+        <a href={`/writing/${essay.id}`}>{essay.data.title}</a>
+        <p class="description">{essay.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .essay-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .essay-list li a {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .essay-list li a:hover {
+    color: var(--accent);
+  }
+
+  .description {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>
