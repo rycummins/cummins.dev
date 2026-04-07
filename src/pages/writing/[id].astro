@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('writing');
+  return essays.map((essay) => ({
+    params: { id: essay.id },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await render(essay);
+---
+
+<Layout title={essay.data.title} prompt="~/writing">
+  <article>
+    <h2 class="essay-title">{essay.data.title}</h2>
+    <div class="prose">
+      <Content />
+    </div>
+    <p class="back"><a href="/writing">&larr; all writing</a></p>
+  </article>
+</Layout>
+
+<style>
+  article {
+    max-width: 70ch;
+  }
+
+  .essay-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 2rem;
+    color: var(--text);
+    font-family: var(--font-mono);
+  }
+
+  .prose {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .prose :global(h2),
+  .prose :global(h3) {
+    font-family: var(--font-mono);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose :global(p) {
+    margin: 0 0 1.25rem;
+  }
+
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--bg-surface);
+    padding: 0.15em 0.35em;
+    border-radius: 3px;
+  }
+
+  .prose :global(pre) {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    padding: 0;
+    font-size: 0.85rem;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    color: var(--text-muted);
+  }
+
+  .back {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+  }
+
+  .back a {
+    color: var(--text-muted);
+  }
+
+  .back a:hover {
+    color: var(--accent);
+  }
+</style>
